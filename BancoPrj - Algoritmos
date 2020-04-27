@@ -1,0 +1,137 @@
+// Gabriel Hygino Nieves Alves - RM:200846 - Turma N2
+
+package bancoprj;
+
+import java.util.Scanner;
+
+public class BancoPrj {
+
+    static StringBuilder exOperacoes = new StringBuilder(); 
+    static Scanner ler = new Scanner(System.in);
+    
+    static int opcao;
+    static String CPF = "123.456.789-00";
+    static String senha = "01020304";
+    static double saldo = 1000.00; 
+    static int opDesejada;   
+    static double deposito;
+    static double saque; 
+    static String a;
+            
+    static void opcaoDesejada(){
+        System.out.println("");
+        System.out.println("O que deseja fazer?");
+        System.out.println("1 - Realizar uma operação");
+        System.out.println("2 - Sair do sistema");
+        System.out.println("");
+                
+        opDesejada = ler.nextInt();
+        
+        switch(opDesejada){
+                    case 1:
+                        opcoes();
+                    case 2:
+                        inicio();
+                }      
+    }   
+        static void opcoes(){
+        
+        System.out.println("");
+        System.out.println("1 - Saldo");
+        System.out.println("2 - Depósito");
+        System.out.println("3 - Saque");
+        System.out.println("0 - Sair");
+        System.out.println("");
+        
+        opcao = ler.nextInt();
+        
+        switch(opcao){
+            case 1:
+                System.out.println("");
+                System.out.println("Saldo Atual: R$ " + saldo);
+                                                     
+                opcaoDesejada();
+                
+            case 2:
+                System.out.println("");
+                System.out.println("Digite o valor a ser depositado: ");
+                deposito = ler.nextDouble();
+                saldo +=  deposito;
+                System.out.println("");
+                System.out.println("Saldo Atual: R$ " + saldo);
+                
+                a = "Depósito + R$ " + deposito;
+                exOperacoes.append(a);
+                exOperacoes.append(System.getProperty("line.separator"));
+                
+                opcaoDesejada();
+            
+            case 3:
+                System.out.println("");
+                System.out.println("Digite o valor a ser sacado: ");
+                saque = ler.nextDouble();
+                saldo -=  saque;
+                System.out.println("");
+                System.out.println("Saldo Atual: R$ " + saldo);
+                
+                a = "Saque: - R$ " + saque;
+                exOperacoes.append(a);
+                exOperacoes.append(System.getProperty("line.separator"));
+                
+                opcaoDesejada();
+                
+            case 0:
+                
+                inicio();
+                            
+            default:
+                System.out.println("Tecla Incorreta");
+                opcoes();
+           }      
+    }
+
+    static void senha(){
+                 
+       System.out.println("Digite sua senha: ");
+        
+        for (int i = 0; i <= 1; i++){
+            
+            String userSENHA = ler.next();
+            
+            if(senha.equals(userSENHA) == true ){
+                System.out.println("Logando no sistema");
+                opcoes();
+                
+            } else {
+                System.out.println("Senha Incorreta");
+                System.out.println("");
+                System.out.println("Digite sua senha novamente: ");
+            }                                
+        }        
+        System.out.println("");
+        
+        for (int i = 0; i<12; i++){
+            System.out.println("");
+        }
+        System.out.println("Sua conta foi bloqueada");
+        inicio();
+}
+       static void inicio(){
+        System.out.println(" SEJA BEM-VINDO AO BANCO FACENS!");
+        
+        System.out.println("Digite seu CPF: ");
+        
+        String userCPF = ler.next();
+        
+        if(CPF.equals(userCPF) == true){    
+            senha();   
+        } else{
+            System.out.println(" TELA DE ACESSO NÃO PERMITIDA!!! ");                       
+            inicio();
+        }            
+    }      
+    public static void main(String[] args) {
+        inicio();
+    }
+    
+}
